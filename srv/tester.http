@@ -1,0 +1,171 @@
+###Service document - describe all my entities
+http://localhost:4004/odata/v4/CatalogService
+
+###Service metadata document - entities, data types, properties, keys
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###Get all data from employee - SELECT * FROM employee
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+
+###Get all data from employee - SELECT * FROM employee --- OData V2
+http://localhost:4004/odata/v2/CatalogService/EmployeeSet
+
+###GET Single employee by its key - SELECT SINGLE * FROM employee WHERE empId = '02BD2137-0890-1EEA-A6C2-BB55C19867FB'
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C19867FB
+
+###How many total employees are there in my system - SELECT COUNT(*) FROM employee - $count predicate
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+
+###Pagigation - Load data chunk by chunk - SELECT * UPTO n ROWS FROM employees
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=2&$skip=2
+
+###Load selective properties - SELECT c1, c2, c3.. FROM employee
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=nameFirst,ID,nameLast,salaryAmount
+
+###Sorting data - SELECT * FROM employee ORDER BY salaryAmount desc
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$orderby=salaryAmount desc&$top=2
+
+###Filtering data - SELECT * FROM employee WHERE bankName = "My Bank of San Francisco"
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=bankName eq 'My Bank of San Francisco'
+
+###Filtering based on pattern search - SELECT * FROM employee WHERE nameFirst like 'S%'
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameFirst, 'S')
+
+###Get All POs
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet
+
+###GET Single PO
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052
+
+###Get the Items of that single order
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052/Items
+
+###Get the header and items data together if needed - SELECT * FROM tab1 INNER JOIN tab1 ON join_condition
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052?$expand=Items
+
+
+###POST call - insert data in table
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{ 
+    "nameFirst" :"Christiano",
+    "nameMiddle" :null,
+    "nameLast" :"Ronaldo",
+    "nameInitials" :null,
+    "sex" :"M",
+    "language" :"E",
+    "phoneNumber" :null,
+    "email" :"christiano@sana.com",
+    "loginName" :"RONALDO",
+    "Currency_code" :"EUR",
+    "salaryAmount" : 10000000,
+    "accountNumber" :"2233445566",
+    "bankId" :"26005885",
+    "bankName" :"My Bank of New York" 
+}
+
+###Make a GET call to check if record is created in DB ***Get the key from last operation
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/6861b9b8-5248-4f8c-9a83-55521e5a74ec
+
+
+###PATCH - update data of certain fields ***Get the key from last operation
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/6861b9b8-5248-4f8c-9a83-55521e5a74ec
+Content-Type: application/json
+
+{
+    "salaryAmount": 50000,
+    "Currency_code": "USD"
+}
+
+###DELETE - to remove data from DB
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/6861b9b8-5248-4f8c-9a83-55521e5a74ec 
+
+###Deep insert = send header and item together
+POST http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet
+Content-Type: application/json
+
+{
+  "CURRENCY_code": "EUR",
+  "GROSS_AMOUNT": 6251.07,
+  "NET_AMOUNT": 5253.00,
+  "TAX_AMOUNT": 998.07,
+  "NODE_KEY": "74867AD200E41EDBA5D8B0C98DC21222",
+  "PO_ID": "300000953",
+  "PARTNER_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06885ACA052",
+  "LIFECYCLE_STATUS": "N",
+  "OVERALL_STATUS": "P",
+  "Items": [
+    {
+      "CURRENCY_code": "GBP",
+      "GROSS_AMOUNT": 3566.43,
+      "NET_AMOUNT": 2997.00,
+      "TAX_AMOUNT": 569.43,
+      "NODE_KEY": "74867AD200E41EDBA5D8B0CBD35D9552",
+      "PO_ITEM_POS": 10,
+      "PRODUCT_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06B26F80052"
+    },
+    {
+      "CURRENCY_code": "GBP",
+      "GROSS_AMOUNT": 1017.45,
+      "NET_AMOUNT": 855,
+      "TAX_AMOUNT": 162.45,
+      "NODE_KEY": "74867AD200E41EDBA5D8B0CBD35D9555",
+      "PO_ITEM_POS": 20,
+      "PRODUCT_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06B26ECC052"
+    }
+  ]
+}
+
+
+###GET Single PO
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052
+
+###Call Action to update PO amount
+POST http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052/boost
+Content-Type: application/json
+
+{}
+
+###Get most expensive orders
+http://localhost:4004/odata/v4/CatalogService/getLargestOrder()
+
+###CDD Service
+http://localhost:4004/odata/v4/CDSService/ProductSet
+
+###Deep Insert
+POST http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet
+Content-Type: application/json
+
+{
+  "CURRENCY_code": "EUR",
+  "GROSS_AMOUNT": 6251.07,
+  "NET_AMOUNT": 5253,
+  "TAX_AMOUNT": 998.07,
+  "NODE_KEY": "74867AD200E41EDBA5D8B0C98DC2D525",
+  "PO_ID": "300000003",
+  "PARTNER_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06885ACA052",
+  "LIFECYCLE_STATUS": "N",
+  "OVERALL_STATUS": "P",
+  "NOTE": "Pizzaria order",
+  "Items": [
+    {
+      "CURRENCY_code": "GBP",
+      "GROSS_AMOUNT": 3566.43,
+      "NET_AMOUNT": 2997,
+      "TAX_AMOUNT": 569.43,
+      "NODE_KEY": "74867AD200E41EDBA5D8B0CBD35X0100",
+      "PO_ITEM_POS": 10,
+      "PRODUCT_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06B26F80052"
+    },
+    {
+      "CURRENCY_code": "GBP",
+      "GROSS_AMOUNT": 1017.45,
+      "NET_AMOUNT": 855,
+      "TAX_AMOUNT": 162.45,
+      "NODE_KEY": "74867AD200E41EDBA5D8B0CBD35X0102",
+      "PO_ITEM_POS": 20,
+      "PRODUCT_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06B26ECC052"
+    }
+  ]
+}
