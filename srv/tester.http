@@ -1,11 +1,13 @@
 ###Service document - describe all my entities
 http://localhost:4004/odata/v4/CatalogService
+Authorization: Basic kalyani:1234
 
 ###Service metadata document - entities, data types, properties, keys
 http://localhost:4004/odata/v4/CatalogService/$metadata
 
 ###Get all data from employee - SELECT * FROM employee
 http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Authorization: Basic kalyani:1234
 
 ###Get all data from employee - SELECT * FROM employee --- OData V2
 http://localhost:4004/odata/v2/CatalogService/EmployeeSet
@@ -39,6 +41,7 @@ http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA
 
 ###Get the Items of that single order
 http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052/Items
+Authorization: Basic kalyani:1234
 
 ###Get the header and items data together if needed - SELECT * FROM tab1 INNER JOIN tab1 ON join_condition
 http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052?$expand=Items

@@ -1,9 +1,16 @@
 using { anubhav.db.master, anubhav.db.transaction } from '../db/datamodel';
 
-service CatalogService @(path: 'CatalogService') {
+service CatalogService @(path: 'CatalogService',
+                        requires: 'authenticated-user') {
 
     //OData Entity - which offers FREE - CURDQ
-    entity EmployeeSet as projection on master.employees;
+    entity EmployeeSet
+        //Authorization
+        @(restrict: [
+            { grant: ['READ'], to: 'Viewer', where: 'bankName = $user.spiderman'  },
+            { grant: ['WRITE'], to: 'Admin'  }
+        ])
+     as projection on master.employees;
     entity BusinessPartnerSet as projection on master.businesspartner;
     entity ProductSet as projection on master.product;
     entity AddressSet as projection on master.address;
