@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": "^9",
     "cds-plugin-ui5": "^0.13.0"
   },
   "scripts": {
@@ -35,9 +36,13 @@
             },
             "kalyani": {
               "password": "1234",
-              "roles": ["Viewer"],
+              "roles": [
+                "Viewer"
+              ],
               "attr": {
-                "spiderman": ["My Bank of London"]
+                "spiderman": [
+                  "My Bank of London"
+                ]
               }
             }
           }
