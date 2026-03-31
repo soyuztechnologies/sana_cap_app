@@ -2,6 +2,7 @@
 
 Welcome to your new project.
 test
+s
 It contains these folders and files, following our recommended project layout:
 
 File or Folder | Purpose
