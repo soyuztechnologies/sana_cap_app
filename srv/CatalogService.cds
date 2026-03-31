@@ -24,7 +24,7 @@ service CatalogService @(path: 'CatalogService',
             when 'A' then 'Approved'
             when 'X' then 'Rejected'
             when 'D' then 'Delivered'
-            else 'Unknown' end as OverallStatus : String(10),
+            else 'Unknown' end as OverallStatus : String(15),
         case OVERALL_STATUS
             when 'P' then 2
             when 'N' then 2

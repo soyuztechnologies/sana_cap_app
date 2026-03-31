@@ -35,12 +35,13 @@ http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameF
 
 ###Get All POs
 http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet
+Authorization: Basic kalyani:1234
 
 ###GET Single PO
 http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052
 
 ###Get the Items of that single order
-http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2E052/Items
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/02BD2137-0890-1EEA-A6C2-BB55C1978999/Items
 Authorization: Basic kalyani:1234
 
 ###Get the header and items data together if needed - SELECT * FROM tab1 INNER JOIN tab1 ON join_condition
