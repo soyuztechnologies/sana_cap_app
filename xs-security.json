@@ -1,6 +1,6 @@
 {
   "xsappname": "mycapapp",
-  "tenant-mode": "dedicated",
+  "tenant-mode": "shared",
   "scopes": [
     {
       "name": "$XSAPPNAME.Viewer",
@@ -9,6 +9,13 @@
     {
       "name": "$XSAPPNAME.Admin",
       "description": "someone can perform CURD on data using this scope"
+    },
+    {
+      "name": "$XSAPPNAME.mtcallback",
+      "description": "Subscription via SaaS Registry",
+      "grant-as-authority-to-apps": [
+        "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      ]
     }
   ],
   "attributes": [

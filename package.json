@@ -7,6 +7,7 @@
     "@cap-js/attachments": "^3.11.0",
     "@cap-js/hana": "^2",
     "@sap/cds": "^9",
+    "@sap/cds-mtxs": "^3",
     "@sap/xssec": "^4",
     "express": "^4"
   },
@@ -33,9 +34,14 @@
           "kind": "mocked",
           "users": {
             "shalini": {
+              "tenant": "t1",
+              "roles": [
+                "Viewer"
+              ],
               "password": "1234"
             },
             "kalyani": {
+              "tenant": "t2",
               "password": "1234",
               "roles": [
                 "Viewer"
@@ -55,8 +61,13 @@
       "[production]": {
         "auth": {
           "kind": "xsuaa"
-        }
+        },
+        "multitenancy": true
+      },
+      "[with-mtx]": {
+        "multitenancy": true
       }
-    }
+    },
+    "profile": "with-mtx-sidecar"
   }
 }
