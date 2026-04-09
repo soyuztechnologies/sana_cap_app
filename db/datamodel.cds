@@ -2,7 +2,7 @@ namespace anubhav.db;
 
 using { cuid, managed, temporal, Currency } from '@sap/cds/common';
 using { anubhav.commons as common } from './commons';
-
+using { Attachments } from '@cap-js/attachments';
 context master {
     
     entity businesspartner {
@@ -86,6 +86,7 @@ context transaction {
         //tight copling and we can load data on-demand
         //perform deep insert with composition
         Items: Composition of many poitems on Items.PARENT_KEY = $self;
+        attachments: Composition of many Attachments;
     }
 
     entity poitems: common.Amount, cuid{
